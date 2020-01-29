@@ -8,10 +8,10 @@ if len(sys.argv) > 1:
     commandData = parseArgs(sys.argv)
     print(str(commandData))
   
-    # if commandData.command == '--help':
-    #   HelpFunctions.general()
-    # elif commandData.command == "load":
-    #   ArgFunctions.load(commandData)
+    if commandData.command == '--help':
+      HelpFunctions.general()
+    elif commandData.command == "load":
+      ArgFunctions.load(commandData)
     # elif commandData.command == "save":
     #   ArgFunctions.save(commandData)
     # elif commandData.command == "history":
