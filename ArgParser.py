@@ -23,6 +23,8 @@ def parseArgs(args):
       shouldSkipNextArg = True
     elif args[i] == "--help":
       output.helpFlag = True
+    elif args[i] == "--stack":
+      output.stackFlag = True
     else:
       raise ValueError(f"Invalid argument {args[i]} given.")
 

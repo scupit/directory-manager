@@ -33,9 +33,11 @@ def getHistory() -> HistoryData:
 
   with open(historyFileName, 'r') as historyFile:
     line = ""
-    while line = historyFile.readline():
+    while not historyFile.closed:
+      line = historyFile.readline()
+
       if line[0] == 's':
         data.slots.append(extractPath(line))
-      elif line[0] == 'd'
+      elif line[0] == 'd':
         data.defaultSlots.append(extractPath(line))
   return data
