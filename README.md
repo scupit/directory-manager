@@ -16,4 +16,4 @@ a directory stack.
 `python main.py --help` will list how to use this script
 
 ## TODO
-[ ] Make a version of this project for git branches. That would be great
+- [ ] Make a version of this project for git branches. That would be great
