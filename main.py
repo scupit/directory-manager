@@ -14,12 +14,10 @@ if len(sys.argv) > 1:
       ArgFunctions.pop(commandData)
     elif commandData.command == "save":
       ArgFunctions.save(commandData)
-    # elif commandData.command == "show":
-    #   ArgFunctions.show(commandData)
-    # elif commandData.command == "top":
-    #   ArgFunctions.top(commandData)
-    # else:
-    #   print("Invalid command, see --help for a command list")
+    elif commandData.command == "show":
+      ArgFunctions.show(commandData)
+    else:
+      print("Invalid command, see --help for a command list")
 
   except ValueError as error:
     print(str(error))

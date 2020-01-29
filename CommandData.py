@@ -7,6 +7,7 @@ class CommandData:
 
   helpFlag: bool = False
   stackFlag: bool = False
+  topFlag: bool = False
 
   def slotString(self):
     return "(Default Slot)" if self.slot is None else self.slot

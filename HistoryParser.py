@@ -2,18 +2,11 @@ import os
 from Globals import historyFileName, numDefaultSlots, numSlots
 from HistoryData import HistoryData
 
-def writeSlots(historyFile, data: HistoryData):
-  for i in range(0, numSlots):
-    historyFile.write(data.slotString(i) + '\n')
-
-def writeDefaultSlots(historyFile, data: HistoryData):
-  for i in range(0, numSlots):
-    historyFile.write(data.defaultSlotString(i) + '\n')
-
 def writeHistory(data: HistoryData):
   with open(historyFileName, 'w') as historyFile:
-    writeSlots(historyFile, data)
-    writeDefaultSlots(historyFile, data)
+    historyFile.write(data.allSlotsAsString())
+    historyFile.write('\n')
+    historyFile.write(data.allDefaultSlotsAsString())
 
 def createEmptyHistory():
   writeHistory(HistoryData())

@@ -5,6 +5,22 @@ class HistoryData:
   slots = []
   defaultSlots = []
 
+  def allSlotsAsString(self) -> str:
+    result = ""
+    for i in range(0, numSlots):
+      result += data.slotString(i)
+      if i != numSlots - 1:
+        result += '\n'
+    return result
+
+  def allDefaultSlotsAsString(self) -> str:
+    result = ""
+    for i in range(0, numDefaultSlots):
+      result += self.defaultSlotString(i)
+      if i != numDefaultSlots - 1:
+        result += '\n'
+    return result
+
   def slotString(self, index: int) -> str:
     return f"s{index}:{self.slots[index] if index < len(self.slots) else ''}"
 

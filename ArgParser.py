@@ -25,6 +25,8 @@ def parseArgs(args):
       output.helpFlag = True
     elif args[i] == "--stack":
       output.stackFlag = True
+    elif args[i] == "--top":
+      output.topFlag = True
     else:
       raise ValueError(f"Invalid argument {args[i]} given.")
 
