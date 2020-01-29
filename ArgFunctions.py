@@ -19,7 +19,7 @@ def save(commandInfo: CommandData):
   if commandInfo.slot is None:
     data.pushDefaultSlot(commandInfo.directory)
     print(commandInfo.directory, "saved to top of stack")
-  elif slotIsValidIndex(commandInfo.slot)
+  elif slotIsValidIndex(commandInfo.slot):
     data.slots[commandInfo.slot] = commandInfo.directory
     print(commandInfo.directory, "saved to save slot", commandInfo.slot)
   else:
