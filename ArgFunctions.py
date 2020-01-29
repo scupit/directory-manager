@@ -10,6 +10,9 @@ def isValidSlotIndex(slot: int) -> bool:
 def isValidStackSlotIndex(slot: int) -> bool:
   return slot >= 0 and slot < numStackSlots
 
+def printTop(data):
+  print(data.stackSlots[0])
+
 def clear(commandInfo: CommandData):
   with History() as data:
     if commandInfo.allFlag:
@@ -67,7 +70,7 @@ def show(commandInfo: CommandData):
     else:
       if commandInfo.stackFlag:
         if commandInfo.topFlag:
-          print(data.stackSlots[0])
+          printTop(data)
         elif not commandInfo.slot is None and isValidStackSlotIndex(commandInfo.slot):
           print(data.stackSlots[commandInfo.slot])
         else:
@@ -82,3 +85,7 @@ def show(commandInfo: CommandData):
             print("Slot must be between 0 and", numSlots - 1)
       else:
         print(data.defaultSlot)
+
+def top(commandInfo: CommandData):
+  with History() as data:
+    printTop(data)

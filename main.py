@@ -19,6 +19,8 @@ if len(sys.argv) > 1:
       ArgFunctions.save(commandData)
     elif commandData.command == "show":
       ArgFunctions.show(commandData)
+    elif commandData.command == "top":
+      ArgFunctions.top(commandData)
     else:
       print("Invalid command, see --help for a command list")
 
