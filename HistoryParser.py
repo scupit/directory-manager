@@ -1,9 +1,6 @@
 import os
+from Globals import historyFileName, numDefaultSlots, numSlots
 from HistoryData import HistoryData
-
-historyFileName = "directory_history.txt"
-numSlots = 10
-numDefaultSlots = 10
 
 def writeSlots(historyFile, data: HistoryData):
   for i in range(0, numSlots):
@@ -36,8 +33,8 @@ def getHistory() -> HistoryData:
     while not historyFile.closed:
       line = historyFile.readline()
 
-      if line[0] == 's':
+      if line[0] == 's' and len(data.slots) < numSlots:
         data.slots.append(extractPath(line))
-      elif line[0] == 'd':
+      elif line[0] == 'd' and len(data.defaultSlots) < numDefaultSlots:
         data.defaultSlots.append(extractPath(line))
   return data

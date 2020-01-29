@@ -11,11 +11,13 @@ if len(sys.argv) > 1:
     if commandData.command == '--help':
       HelpFunctions.general()
     elif commandData.command == "pop":
-      ArgFunctions.slots(commandData)
-    # elif commandData.command == "save":
-    #   ArgFunctions.save(commandData)
+      ArgFunctions.pop(commandData)
+    elif commandData.command == "save":
+      ArgFunctions.save(commandData)
     # elif commandData.command == "show":
-    #   ArgFunctions.history(commandData)
+    #   ArgFunctions.show(commandData)
+    # elif commandData.command == "top":
+    #   ArgFunctions.top(commandData)
     # else:
     #   print("Invalid command, see --help for a command list")
 

@@ -1,3 +1,4 @@
+from Globals import numDefaultSlots, numSlots
 import HistoryParser
 
 class HistoryData:
@@ -22,3 +23,13 @@ class HistoryData:
 
       self.defaultSlots = newStackSlots
       return mostRecentStackSlot
+
+  def pushDefaultSlot(self, directory: str):
+    if len(self.defaultSlots) == 0:
+      self.defaultSlots.append(directory)
+    # This can be shortened, but is much more readable this way
+    elif len(self.defaultSlots) + 1 <= numDefaultSlots:
+      self.defaultSlots = [directory] + self.defaultSlots
+    else:
+      self.defaultSlots.pop()
+      self.defaultSlots = [directory] + self.defaultSlots

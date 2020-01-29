@@ -5,5 +5,6 @@ def general():
   print(f"{argName} pop")
   print(f"{argName} save [-s slotIndex] [-d directory]")
   print(f"{argName} show [--stack] [-s slotIndex]")
+  print(f"{argName} top")
   print(f"{argName} --help")
   
