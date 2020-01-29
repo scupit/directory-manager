@@ -1,12 +1,12 @@
 import os
-from Globals import historyFileName, numDefaultSlots, numSlots
+from Globals import historyFileName, numStackSlots, numSlots, slotPrefix, stackSlotPrefix
 from HistoryData import HistoryData
 
 def writeHistory(data: HistoryData):
   with open(historyFileName, 'w') as historyFile:
     historyFile.write(data.allSlotsAsString())
     historyFile.write('\n')
-    historyFile.write(data.allDefaultSlotsAsString())
+    historyFile.write(data.allStackSlotsAsString())
 
 def createEmptyHistory():
   writeHistory(HistoryData())
@@ -21,8 +21,10 @@ def getHistory(data = HistoryData()) -> HistoryData:
 
   with open(historyFileName, 'r') as historyFile:
     for line in historyFile:
-      if line[0] == 's' and len(data.slots) < numSlots:
+      line = line.strip()
+
+      if line.find(slotPrefix) == 0 and len(data.slots) < numSlots:
         data.slots.append(extractPath(line))
-      elif line[0] == 'd' and len(data.defaultSlots) < numDefaultSlots:
-        data.defaultSlots.append(extractPath(line))
+      elif line.find(stackSlotPrefix) == 0 and len(data.stackSlots) < numStackSlots:
+        data.stackSlots.append(extractPath(line))
   return data

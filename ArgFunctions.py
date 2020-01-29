@@ -1,6 +1,6 @@
 from CommandData import CommandData
 from History import History
-from Globals import numDefaultSlots, numSlots
+from Globals import numStackSlots, numSlots
 
 # TODO: If help flag is set, call the corresponding command help function
 
@@ -8,31 +8,38 @@ def isValidSlotIndex(slot: int) -> bool:
   return slot >= 0 and slot < numSlots
 
 def isValidStackSlotIndex(slot: int) -> bool:
-  return slot >= 0 and slot < numDefaultSlots
+  return slot >= 0 and slot < numStackSlots
 
 def clear(commandInfo: CommandData):
   with History() as data:
-    if commandInfo.stackFlag:
-      data.defaultSlots.clear()
+    if commandInfo.allFlag:
+      data.stackSlots.clear()
+      data.slots.clear()
+      print("Cleared slots and stack")
+    elif commandInfo.stackFlag:
+      data.stackSlots.clear()
+      print("Cleared stack")
     elif not commandInfo.slot is None and isValidSlotIndex(commandInfo.slot):
       data.slots[commandInfo.slot] = ""
+      print("Cleared slot", commandInfo.slot)
     else:
       data.slots.clear()
+      print("Cleared all slots")
 
 def pop(commandInfo: CommandData):
   with History() as data:
-    mostRecentStackSlot = data.popDefaultSlot()
+    mostRecentStackSlot = data.popStackSlot()
     print(mostRecentStackSlot)
 
 def push(commandInfo: CommandData):
   with History() as data:
-    data.pushDefaultSlot(commandInfo.directory)
+    data.pushStackSlot(commandInfo.directory)
     print(commandInfo.directory, "saved to top of stack")
 
 def save(commandInfo: CommandData):
   with History() as data:
     if commandInfo.slot is None:
-      data.pushDefaultSlot(commandInfo.directory)
+      data.pushStackSlot(commandInfo.directory)
       print(commandInfo.directory, "saved to top of stack")
     elif isValidSlotIndex(commandInfo.slot):
       data.slots[commandInfo.slot] = commandInfo.directory
@@ -42,13 +49,18 @@ def save(commandInfo: CommandData):
 
 def show(commandInfo: CommandData):
   with History() as data:
-    if commandInfo.stackFlag:
+    if commandInfo.allFlag:
+      print("---Slots---")
+      print(data.allSlotsAsString())
+      print("\n\n---Stack---")
+      print(data.allStackSlotsAsString())
+    elif commandInfo.stackFlag:
       if commandInfo.topFlag:
-        print(data.defaultSlots[0])
+        print(data.stackSlots[0])
       elif not commandInfo.slot is None and isValidStackSlotIndex(commandInfo.slot):
-        print(data.defaultSlots[commandInfo.slot])
+        print(data.stackSlots[commandInfo.slot])
       else:
-        print(data.allDefaultSlotsAsString())
+        print(data.allStackSlotsAsString())
     elif commandInfo.slot is None:
       print(data.allSlotsAsString())
     elif isValidSlotIndex(commandInfo.slot):

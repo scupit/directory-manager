@@ -1,9 +1,9 @@
-from Globals import numDefaultSlots, numSlots
+from Globals import numStackSlots, numSlots, slotPrefix, stackSlotPrefix
 import HistoryParser
 
 class HistoryData:
   slots = []
-  defaultSlots = []
+  stackSlots = []
 
   def allSlotsAsString(self) -> str:
     result = ""
@@ -13,39 +13,39 @@ class HistoryData:
         result += '\n'
     return result
 
-  def allDefaultSlotsAsString(self) -> str:
+  def allStackSlotsAsString(self) -> str:
     result = ""
-    for i in range(0, numDefaultSlots):
-      result += self.defaultSlotString(i)
-      if i != numDefaultSlots - 1:
+    for i in range(0, numStackSlots):
+      result += self.stackSlotString(i)
+      if i != numStackSlots - 1:
         result += '\n'
     return result
 
   def slotString(self, index: int) -> str:
-    return f"s{index}: {self.slots[index] if index < len(self.slots) else ''}"
+    return f"{slotPrefix}{index}: {self.slots[index] if index < len(self.slots) else ''}"
 
-  def defaultSlotString(self, index: int) -> str:
-    return f"d{index}: {self.defaultSlots[index] if index < len(self.defaultSlots) else ''}"
+  def stackSlotString(self, index: int) -> str:
+    return f"{stackSlotPrefix}{index}: {self.stackSlots[index] if index < len(self.stackSlots) else ''}"
 
-  def popDefaultSlot(self) -> str:
-    if len(self.defaultSlots) == 0:
+  def popStackSlot(self) -> str:
+    if len(self.stackSlots) == 0:
       return ""
     else:
-      mostRecentStackSlot = self.defaultSlots[0]
+      mostRecentStackSlot = self.stackSlots[0]
       newStackSlots = []
 
-      for i in range(1, len(self.defaultSlots)):
-        newStackSlots.append(self.defaultSlots[i])
+      for i in range(1, len(self.stackSlots)):
+        newStackSlots.append(self.stackSlots[i])
 
-      self.defaultSlots = newStackSlots
+      self.stackSlots = newStackSlots
       return mostRecentStackSlot
 
-  def pushDefaultSlot(self, directory: str):
-    if len(self.defaultSlots) == 0:
-      self.defaultSlots.append(directory)
+  def pushStackSlot(self, directory: str):
+    if len(self.stackSlots) == 0:
+      self.stackSlots.append(directory)
     # This can be shortened, but is much more readable this way
-    elif len(self.defaultSlots) + 1 <= numDefaultSlots:
-      self.defaultSlots = [directory] + self.defaultSlots
+    elif len(self.stackSlots) + 1 <= numStackSlots:
+      self.stackSlots = [directory] + self.stackSlots
     else:
-      self.defaultSlots.pop()
-      self.defaultSlots = [directory] + self.defaultSlots
+      self.stackSlots.pop()
+      self.stackSlots = [directory] + self.stackSlots

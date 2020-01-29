@@ -21,6 +21,8 @@ def parseArgs(args):
     elif args[i] == "-d":
       output.directory = str(Path(args[i + 1]).resolve())
       shouldSkipNextArg = True
+    elif args[i] == "--all":
+      output.allFlag = True
     elif args[i] == "--help":
       output.helpFlag = True
     elif args[i] == "--stack":
