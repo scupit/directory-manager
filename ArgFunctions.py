@@ -10,6 +10,15 @@ def isValidSlotIndex(slot: int) -> bool:
 def isValidStackSlotIndex(slot: int) -> bool:
   return slot >= 0 and slot < numDefaultSlots
 
+def clear(commandInfo: CommandData):
+  with History() as data:
+    if commandInfo.stackFlag:
+      data.defaultSlots.clear()
+    elif not commandInfo.slot is None and isValidSlotIndex(commandInfo.slot):
+      data.slots[commandInfo.slot] = ""
+    else:
+      data.slots.clear()
+
 def pop(commandInfo: CommandData):
   with History() as data:
     mostRecentStackSlot = data.popDefaultSlot()
