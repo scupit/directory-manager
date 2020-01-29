@@ -6,12 +6,14 @@ import HelpFunctions
 if len(sys.argv) > 1:
   try:
     commandData = parseArgs(sys.argv)
-    print(str(commandData))
+    # print(str(commandData))
   
     if commandData.command == '--help':
       HelpFunctions.general()
     elif commandData.command == "pop":
       ArgFunctions.pop(commandData)
+    elif commandData.command == "push":
+      ArgFunctions.push(commandData)
     elif commandData.command == "save":
       ArgFunctions.save(commandData)
     elif commandData.command == "show":
