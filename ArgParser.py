@@ -25,6 +25,8 @@ def parseArgs(args):
       output.allFlag = True
     elif args[i] == "--help":
       output.helpFlag = True
+    elif args[i] == "--slots":
+      output.slotsFlag = True
     elif args[i] == "--stack":
       output.stackFlag = True
     elif args[i] == "--top":

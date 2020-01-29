@@ -1,9 +1,10 @@
-from Globals import numStackSlots, numSlots, slotPrefix, stackSlotPrefix
+from Globals import numStackSlots, numSlots, slotPrefix, stackSlotPrefix, defaultSlotPrefix
 import HistoryParser
 
 class HistoryData:
   slots = []
   stackSlots = []
+  defaultSlot = ""
 
   def allSlotsAsString(self) -> str:
     result = ""
@@ -21,11 +22,21 @@ class HistoryData:
         result += '\n'
     return result
 
+  def clearDefaultSlot(self):
+    self.defaultSlot = ""
+
+  def clearSlot(self, index: int):
+    if index > 0 and index < len(self.slots):
+      self.slots[index] = ""
+
+  def defaultSlotString(self) -> str:
+    return f"{defaultSlotPrefix}: {self.defaultSlot}"
+
   def slotString(self, index: int) -> str:
-    return f"{slotPrefix}{index}: {self.slots[index] if index < len(self.slots) else ''}"
+    return f"{slotPrefix} {index}: {self.slots[index] if index < len(self.slots) else ''}"
 
   def stackSlotString(self, index: int) -> str:
-    return f"{stackSlotPrefix}{index}: {self.stackSlots[index] if index < len(self.stackSlots) else ''}"
+    return f"{stackSlotPrefix} {index}: {self.stackSlots[index] if index < len(self.stackSlots) else ''}"
 
   def popStackSlot(self) -> str:
     if len(self.stackSlots) == 0:
