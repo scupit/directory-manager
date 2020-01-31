@@ -54,11 +54,19 @@ def push(commandInfo: CommandData):
 def save(commandInfo: CommandData):
   with History() as data:
     if commandInfo.slot is None:
-      data.defaultSlot = commandInfo.directory
-      print(commandInfo.directory, "saved to the default space")
+      if commandInfo.branchFlag:
+        data.defaultSlot = commandInfo.branch
+        print("Branch", commandInfo.branch, "saved to the default space")
+      else:
+        data.defaultSlot = commandInfo.directory
+        print("Directory", commandInfo.directory, "saved to the default space")
     elif isValidSlotIndex(commandInfo.slot):
-      data.slots[commandInfo.slot] = commandInfo.directory
-      print(commandInfo.directory, "saved to save slot", commandInfo.slot)
+      if commandInfo.branchFlag:
+        data.slots[commandInfo.slot] = commandInfo.branch
+        print("Branch", commandInfo.branch, "saved to save slot", commandInfo.slot)
+      else:
+        data.slots[commandInfo.slot] = commandInfo.directory
+        print("Directory", commandInfo.directory, "saved to save slot", commandInfo.slot)
     else:
       print("Slot must be between 0 and", numSlots - 1)
 
