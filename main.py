@@ -6,7 +6,6 @@ import HelpFunctions
 if len(sys.argv) > 1:
   try:
     commandData = parseArgs(sys.argv)
-    print(commandData)
   
     if commandData.command == '--help':
       HelpFunctions.general()
