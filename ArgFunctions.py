@@ -44,8 +44,12 @@ def pop(commandInfo: CommandData):
 
 def push(commandInfo: CommandData):
   with History() as data:
-    data.pushStackSlot(commandInfo.directory)
-    print(commandInfo.directory, "saved to top of stack")
+    if commandInfo.branchFlag:
+      data.pushStackSlot(commandInfo.branch)
+      print("Branch", commandInfo.branch, "saved to top of stack")
+    else:
+      data.pushStackSlot(commandInfo.directory)
+      print("Directory", commandInfo.directory, "saved to top of stack")
 
 def save(commandInfo: CommandData):
   with History() as data:
