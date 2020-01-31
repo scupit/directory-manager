@@ -4,6 +4,9 @@ from CommandData import CommandData
 def isFlag(arg: str) -> bool:
   return arg[0] == '-'
 
+def nextArgExists(index: int, args: list) -> bool:
+  return index < len(args) - 1
+
 def parseArgs(args):
   numArgs = len(args)
   output = CommandData()
@@ -24,8 +27,8 @@ def parseArgs(args):
     elif args[i] == "-b":
       output.branchFlag = True
       # Giving a branch to -b is optional
-      if i < numArgs - 1 and isFlag(args[i + 1]):
-        output.branch = args[i]
+      if nextArgExists(i, args) and not isFlag(args[i + 1]):
+        output.branch = args[i + 1]
         shouldSkipNextArg = True
     elif args[i] == "-d":
       output.directory = str(Path(args[i + 1]).resolve())
