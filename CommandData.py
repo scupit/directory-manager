@@ -1,11 +1,13 @@
-import os
+import subprocess
 
 class CommandData:
+  branch: str = subprocess.run(["git", "branch", "--show-current"], capture_output=True).stdout
   command: str = "--help"
   slot = None
   directory: str = os.getcwd()
 
   allFlag: bool = False
+  branchFlag: bool = False
   helpFlag: bool = False
   slotsFlag: bool = False
   stackFlag: bool = False

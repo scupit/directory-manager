@@ -1,6 +1,9 @@
 from pathlib import Path
 from CommandData import CommandData
 
+def isFlag(arg: str) -> bool:
+  return arg[0] == '-'
+
 def parseArgs(args):
   numArgs = len(args)
   output = CommandData()
@@ -18,6 +21,12 @@ def parseArgs(args):
     if args[i] == "-s":
       output.slot = int(args[i + 1])
       shouldSkipNextArg = True
+    elif args[i] == "-b":
+      output.branchFlag = True
+      # Giving a branch to -b is optional
+      if i < numArgs - 1 and isFlag(args[i] + 1)
+        output.branch = args[i]
+        shouldSkipNextArg = True
     elif args[i] == "-d":
       output.directory = str(Path(args[i + 1]).resolve())
       shouldSkipNextArg = True
