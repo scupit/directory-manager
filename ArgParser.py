@@ -24,7 +24,7 @@ def parseArgs(args):
     elif args[i] == "-b":
       output.branchFlag = True
       # Giving a branch to -b is optional
-      if i < numArgs - 1 and isFlag(args[i] + 1)
+      if i < numArgs - 1 and isFlag(args[i + 1]):
         output.branch = args[i]
         shouldSkipNextArg = True
     elif args[i] == "-d":
