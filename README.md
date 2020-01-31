@@ -1,5 +1,5 @@
 # Directory storage
-A simple python CLI for storing and managing directory names. Storage spaces include a
+A simple python CLI for storing and managing directory names and branches. Storage spaces include a
 default slot, 10 slots, and a stack with 10 spaces.
 
 ## Why is this useful?
@@ -11,9 +11,11 @@ a directory stack.
 ## Possible Uses
 * Wrap this functionality in a *load* script and easily `cd` between projects
 * For memory, remember where your last few projects are
+* For large projects, use this to remember some of the branches you are working on
 
 # How to Run
 `python main.py --help` will list how to use this script
 
 ## TODO
-- [ ] Make a version of this project for git branches. That would be great
+- [X] Make a version of this project for git branches. That would be great. (Done, with the same project)
+- [ ] Maybe let this store any entered string, like a clipboard
